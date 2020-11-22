@@ -76,4 +76,12 @@ public class ReadFileTst {
 		
 		 assertEquals(expected, parser.getFile());
 	}
+	
+	@Test
+	public void TestReadFileEmpty() throws ArquivoNaoEncontradoException {
+		Parser parser = new Parser();
+		parser.readFile("src/static/empty.out");
+		Vector<Vector<Integer>> expected = new Vector<Vector<Integer>>();
+		assertEquals(expected, parser.getFile());
+	}
 }
