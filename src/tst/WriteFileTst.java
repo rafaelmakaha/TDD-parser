@@ -38,5 +38,14 @@ class WriteFileTst {
 		parser.setSequenceFormat("ROW");
 		assertEquals(true, parser.writeFile());	
 	}
+	
+	@Test
+	void TestWriteFile3() throws IOException, ArquivoNaoEncontradoException, DelimitadorInvalidoException, EscritaNaoPermitidaException {
+		parser.readFile("src/static/analysisTime.out");
+		parser.setOutputFilePath("src/output/out.out");
+		parser.setDelimiter("+");
+		parser.setSequenceFormat("LINE");
+		assertEquals(true, parser.writeFile());	
+	}
 
 }

@@ -6,7 +6,7 @@ import java.io.FileReader;
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.Vector;
-
+import java.util.Collections;
 import java.util.Scanner;
 
 import exceptions.ArquivoNaoEncontradoException;
@@ -58,6 +58,28 @@ public class Parser {
 					for (int j=0; j < aux.size(); j++) {
 						writer.write(Integer.toString(aux.elementAt(j)));
 						writer.write(getDelimiter());
+					}
+					writer.write("\n");
+				}
+			} else {
+				Vector<Integer> sizes = new Vector<Integer>();
+				for(int i=0; i < values.size(); i++) {
+					sizes.add(values.elementAt(i).size());
+					writer.write(Integer.toString(i+1));
+					writer.write(";");
+				}
+				writer.write("\n");
+				for(int i=0; i < Collections.max(sizes); i++) {
+					int j = 0;
+					while(j < values.size()) {
+						Vector<Integer> aux = values.elementAt(j);							
+						try {
+							writer.write(Integer.toString(aux.elementAt(i)));
+						} catch (Exception e) {
+							writer.write("");
+						}
+						writer.write(";");
+						j++;
 					}
 					writer.write("\n");
 				}
