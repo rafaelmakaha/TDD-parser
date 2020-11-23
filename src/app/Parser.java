@@ -12,6 +12,7 @@ import exceptions.DelimitadorInvalidoException;
 public class Parser {
 	private Vector<Vector<Integer>> vls;
 	private String delimiter;
+	private String sequenceFormat;
 	
 	public Parser() {
 		this.vls = new Vector<Vector<Integer>>();
@@ -48,6 +49,14 @@ public class Parser {
 	
 	public Vector<Vector<Integer>> getFile () {
 		return this.vls;
+	}
+	
+	public void setSequenceFormat(String sequenceFormat) {
+		this.sequenceFormat = sequenceFormat;
+	}
+	
+	public String getSequenceFormat() {
+		return "LINE";
 	}
 	
 }
