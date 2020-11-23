@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import app.Parser;
 import exceptions.EscritaNaoPermitidaException;
@@ -16,23 +18,15 @@ class OutputFilePathTest {
 	public void setup() {
 		parser = new Parser();
 	}
-
-	@Test
-	void TestOutputFilePath() throws EscritaNaoPermitidaException {
-		parser.setOutputFilePath("src/output/totalTimeTab.out");
-		assertEquals("src/output/totalTimeTab.out", parser.getOutputFilePath());
-	}
 	
-	@Test
-	void TestOutputFilePath2() throws EscritaNaoPermitidaException {
-		parser.setOutputFilePath("src/output/analysisTimeTab.out");
-		assertEquals("src/output/analysisTimeTab.out", parser.getOutputFilePath());
-	}
-	
-	@Test
-	void TestOutputFilePath3() throws EscritaNaoPermitidaException {
-		parser.setOutputFilePath("src/output/anotherOne.out");
-		assertEquals("src/output/anotherOne.out", parser.getOutputFilePath());
+	@ParameterizedTest
+	@ValueSource(strings = {
+			"src/output/totalTimeTab.out",
+			"src/output/analysisTimeTab.out"
+	})	
+	void TestOutputFilePath(String input) throws EscritaNaoPermitidaException {
+		parser.setOutputFilePath(input);
+		assertEquals(input, parser.getOutputFilePath());
 	}
 	
 	@Test
