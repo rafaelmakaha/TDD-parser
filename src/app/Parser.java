@@ -1,9 +1,10 @@
 package app;
 
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.Vector;
 
 import java.util.Scanner;
@@ -13,7 +14,7 @@ import exceptions.DelimitadorInvalidoException;
 import exceptions.EscritaNaoPermitidaException;
 
 public class Parser {
-	private Vector<Vector<Integer>> vls;
+	public Vector<Vector<Integer>> vls;
 	private String delimiter;
 	private String sequenceFormat;
 	private String outputFilePath;
@@ -34,14 +35,38 @@ public class Parser {
 			if (value.startsWith("-")) {
 				this.vls.add(new Vector<Integer>());
 			} else {
-				vls.lastElement().add(Integer.parseInt(value));
+				this.vls.lastElement().add(Integer.parseInt(value));
 			}
 		}
 		reader.close();
 	}
 	
-	public boolean writeFile ()  {
-		return true;
+	public boolean writeFile () throws EscritaNaoPermitidaException  {
+		try {
+			FileOutputStream file = new FileOutputStream(getOutputFilePath());
+			
+			OutputStreamWriter writer =
+					new OutputStreamWriter(file, StandardCharsets.UTF_8);
+			
+			Vector<Vector<Integer>> values = getFile();
+			
+			if (getSequenceFormat() == "ROW") {				
+				for(int i=0; i < values.size(); i++) {
+					Vector<Integer> aux = values.elementAt(i);
+					writer.write(Integer.toString(i+1));
+					writer.write(getDelimiter());
+					for (int j=0; j < aux.size(); j++) {
+						writer.write(Integer.toString(aux.elementAt(j)));
+						writer.write(getDelimiter());
+					}
+					writer.write("\n");
+				}
+			}
+			writer.close();
+			return true;
+		} catch (Exception err) {
+			throw new EscritaNaoPermitidaException();
+		}
 	}
 	
 	public String getDelimiter () {
