@@ -8,8 +8,8 @@ import java.util.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import app.Parser;
 import exceptions.ArquivoNaoEncontradoException;
-import tddParser.Parser;
 
 public class ReadFileTst {	
 	Parser parser;
