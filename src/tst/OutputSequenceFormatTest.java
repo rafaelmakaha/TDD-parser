@@ -19,5 +19,9 @@ class OutputSequenceFormatTest {
 		parser.setSequenceFormat("LINE");
 		assertEquals("LINE", parser.getSequenceFormat());
 	}
-
+	@Test
+	void TestOutputSequenceFormatROW() {
+		parser.setSequenceFormat("ROW");
+		assertEquals("ROW", parser.getSequenceFormat());
+	}
 }

@@ -56,7 +56,7 @@ public class Parser {
 	}
 	
 	public String getSequenceFormat() {
-		return "LINE";
+		return this.sequenceFormat;
 	}
 	
 }
