@@ -2,6 +2,8 @@ package app;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Vector;
 
 import java.util.Scanner;
@@ -36,6 +38,10 @@ public class Parser {
 			}
 		}
 		reader.close();
+	}
+	
+	public boolean writeFile ()  {
+		return true;
 	}
 	
 	public String getDelimiter () {
