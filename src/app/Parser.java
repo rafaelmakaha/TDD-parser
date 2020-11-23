@@ -35,7 +35,7 @@ public class Parser {
 	}
 	
 	public String getDelimiter () {
-		return ";";
+		return this.delimiter;
 	}
 	
 	public void setDelimiter (String delimiter) {
