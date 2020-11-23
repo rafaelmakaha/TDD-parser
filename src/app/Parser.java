@@ -10,6 +10,7 @@ import exceptions.ArquivoNaoEncontradoException;
 
 public class Parser {
 	private Vector<Vector<Integer>> vls;
+	private String delimiter;
 	
 	public Parser() {
 		this.vls = new Vector<Vector<Integer>>();
@@ -33,7 +34,15 @@ public class Parser {
 		reader.close();
 	}
 	
-	public Vector<Vector<Integer>> getFile() {
+	public String getDelimiter () {
+		return ";";
+	}
+	
+	public void setDelimiter (String delimiter) {
+		this.delimiter = delimiter;
+	}
+	
+	public Vector<Vector<Integer>> getFile () {
 		return this.vls;
 	}
 	
