@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import app.Parser;
 import exceptions.DelimitadorInvalidoException;
@@ -15,23 +17,23 @@ class DelimiterTst {
 	public void setup() {
 		parser = new Parser();
 	}
-
-	@Test
-	public void TestDelimiterSuccess () throws DelimitadorInvalidoException {
-		parser.setDelimiter(";");
-		assertEquals(";", parser.getDelimiter());
-	}
 	
-	@Test
-	public void TestDelimiterSuccess2 () throws DelimitadorInvalidoException {
-		parser.setDelimiter(",");
-		assertEquals(",", parser.getDelimiter());
-	}
-	
-	@Test 
-	public void TestDelimiterSuccess3 () throws DelimitadorInvalidoException {
-		parser.setDelimiter("g");
-		assertEquals("g", parser.getDelimiter());
+	@ParameterizedTest
+	@ValueSource(strings = {",",
+			".",
+			"/",
+			"\n",
+			"\r",
+			"\t",
+			";",
+			"*",
+			"-",
+			"_",
+			"+"
+	} )
+	public void TestSetDelimiter (String input) throws DelimitadorInvalidoException {
+		parser.setDelimiter(input);
+		assertEquals(input, parser.getDelimiter());
 	}
 	
 	@Test
