@@ -10,16 +10,23 @@ import exceptions.DelimitadorInvalidoException;
 class DelimiterTst {
 
 	@Test
-	void TestDelimiterSuccess () throws DelimitadorInvalidoException {
+	public void TestDelimiterSuccess () throws DelimitadorInvalidoException {
 		Parser parser = new Parser();
 		parser.setDelimiter(";");
 		assertEquals(";", parser.getDelimiter());
 	}
 	
 	@Test
-	void TestDelimiterSuccess2 () throws DelimitadorInvalidoException {
+	public void TestDelimiterSuccess2 () throws DelimitadorInvalidoException {
 		Parser parser = new Parser();
 		parser.setDelimiter(",");
 		assertEquals(",", parser.getDelimiter());
+	}
+	
+	@Test 
+	public void TestDelimiterSuccess3 () throws DelimitadorInvalidoException {
+		Parser parser = new Parser();
+		parser.setDelimiter("g");
+		assertEquals("g", parser.getDelimiter());
 	}
 }
