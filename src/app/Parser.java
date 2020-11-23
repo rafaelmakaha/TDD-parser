@@ -61,7 +61,7 @@ public class Parser {
 	}
 	
 	public String getOutputFilePath() {
-		return "src/output/output.out";
+		return this.outputFilePath;
 	}
 	
 	public void setOutputFilePath(String outputFilePath) {
