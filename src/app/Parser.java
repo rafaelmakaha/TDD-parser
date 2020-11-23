@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 import exceptions.ArquivoNaoEncontradoException;
 import exceptions.DelimitadorInvalidoException;
+import exceptions.EscritaNaoPermitidaException;
 
 public class Parser {
 	private Vector<Vector<Integer>> vls;
@@ -64,8 +65,12 @@ public class Parser {
 		return this.outputFilePath;
 	}
 	
-	public void setOutputFilePath(String outputFilePath) {
-		this.outputFilePath = outputFilePath;
+	public void setOutputFilePath(String outputFilePath) throws EscritaNaoPermitidaException {
+		if (outputFilePath.contains("src/output/")) {
+			this.outputFilePath = outputFilePath;			
+		} else {
+			throw new EscritaNaoPermitidaException();
+		}
 	}
 	
 }
