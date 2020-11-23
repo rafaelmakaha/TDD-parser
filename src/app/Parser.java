@@ -7,6 +7,7 @@ import java.util.Vector;
 import java.util.Scanner;
 
 import exceptions.ArquivoNaoEncontradoException;
+import exceptions.DelimitadorInvalidoException;
 
 public class Parser {
 	private Vector<Vector<Integer>> vls;
@@ -38,8 +39,11 @@ public class Parser {
 		return this.delimiter;
 	}
 	
-	public void setDelimiter (String delimiter) {
-		this.delimiter = delimiter;
+	public void setDelimiter (String delimiter) throws DelimitadorInvalidoException {
+		if (delimiter.length() == 1)
+			this.delimiter = delimiter;
+		else
+			throw new DelimitadorInvalidoException(delimiter);
 	}
 	
 	public Vector<Vector<Integer>> getFile () {

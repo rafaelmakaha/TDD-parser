@@ -29,4 +29,13 @@ class DelimiterTst {
 		parser.setDelimiter("g");
 		assertEquals("g", parser.getDelimiter());
 	}
+	
+	@Test
+	public void TestDelimitadorInvalidoException () {
+		Parser parser = new Parser();
+		
+		assertThrows(DelimitadorInvalidoException.class, () -> {
+			parser.setDelimiter("ab");
+		});
+	}
 }
