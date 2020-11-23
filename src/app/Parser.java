@@ -13,6 +13,7 @@ public class Parser {
 	private Vector<Vector<Integer>> vls;
 	private String delimiter;
 	private String sequenceFormat;
+	private String outputFilePath;
 	
 	public Parser() {
 		this.vls = new Vector<Vector<Integer>>();
@@ -57,6 +58,14 @@ public class Parser {
 	
 	public String getSequenceFormat() {
 		return this.sequenceFormat;
+	}
+	
+	public String getOutputFilePath() {
+		return "src/output/output.out";
+	}
+	
+	public void setOutputFilePath(String outputFilePath) {
+		this.outputFilePath = outputFilePath;
 	}
 	
 }
