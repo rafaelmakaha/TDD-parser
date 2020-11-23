@@ -26,5 +26,11 @@ class OutputFilePathTest {
 		parser.setOutputFilePath("src/output/analysisTimeTab.out");
 		assertEquals("src/output/analysisTimeTab.out", parser.getOutputFilePath());
 	}
+	
+	@Test
+	void TestOutputFilePath3() {
+		parser.setOutputFilePath("src/output/anotherOne.out");
+		assertEquals("src/output/anotherOne.out", parser.getOutputFilePath());
+	}
 
 }
