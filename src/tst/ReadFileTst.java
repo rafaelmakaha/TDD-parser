@@ -1,6 +1,7 @@
 package tst;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.*;
 
@@ -86,5 +87,12 @@ public class ReadFileTst {
 		parser.readFile("src/static/empty.out");
 		Vector<Vector<Integer>> expected = new Vector<Vector<Integer>>();
 		assertEquals(expected, parser.getFile());
+	}
+	
+	@Test
+	public void TestArquivoNaoEncontradoException() {
+		assertThrows(ArquivoNaoEncontradoException.class, () -> {
+			parser.readFile("src/static/nofile.out");
+		});
 	}
 }
