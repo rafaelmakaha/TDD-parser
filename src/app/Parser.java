@@ -18,11 +18,13 @@ public class Parser {
 	private String delimiter;
 	private String sequenceFormat;
 	private String outputFilePath;
+	private String inputFilePath;
 	
 	public Parser() {
 		this.vls = new Vector<Vector<Integer>>();
 	}
 	public void readFile (String fileName) throws ArquivoNaoEncontradoException {
+		setInputFilePath(fileName);
 		Scanner reader;
 		try {
 			reader = new Scanner(new FileReader(fileName));
@@ -43,7 +45,12 @@ public class Parser {
 	
 	public boolean writeFile () throws EscritaNaoPermitidaException  {
 		try {
-			FileOutputStream file = new FileOutputStream(getOutputFilePath());
+			String outFile = null;
+			if (getInputFilePath().contains("analysis"))
+				outFile = "analysisTimeTab.out";
+			if (getInputFilePath().contains("total"))
+				outFile = "analysisTimeTab.out";
+			FileOutputStream file = new FileOutputStream(getOutputFilePath()+outFile);
 			
 			OutputStreamWriter writer =
 					new OutputStreamWriter(file, StandardCharsets.UTF_8);
@@ -119,11 +126,19 @@ public class Parser {
 	}
 	
 	public void setOutputFilePath(String outputFilePath) throws EscritaNaoPermitidaException {
-		if (outputFilePath.contains("src/output/")) {
+		if (outputFilePath.endsWith("/")){
 			this.outputFilePath = outputFilePath;			
 		} else {
 			throw new EscritaNaoPermitidaException();
 		}
+	}
+	
+	public void setInputFilePath(String input) {
+		this.inputFilePath = input;
+	}
+	
+	public String getInputFilePath() {
+		return this.inputFilePath;
 	}
 	
 }
