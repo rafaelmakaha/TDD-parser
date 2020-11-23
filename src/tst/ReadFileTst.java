@@ -4,17 +4,22 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.*;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import exceptions.ArquivoNaoEncontradoException;
 import tddParser.Parser;
 
 public class ReadFileTst {	
+	Parser parser;
+	
+	@BeforeEach
+	public void setup() {
+		parser = new Parser();
+	}
 	
 	@Test
 	public void TestReadFileTotalTime() throws ArquivoNaoEncontradoException {
-		Parser parser = new Parser();
 		parser.readFile("src/static/totalTime.out");
 		List<List<Integer>> expected = new ArrayList<List<Integer>>() {{
 	    add(Arrays.asList(776, 1102, 1121, 1134, 1161, 1204, 1070, 1140, 1157, 1091));
@@ -44,7 +49,6 @@ public class ReadFileTst {
 	
 	@Test
 	public void TestReadFileAnalysisTime() throws ArquivoNaoEncontradoException {
-		Parser parser = new Parser();
 		parser.readFile("src/static/analysisTime.out");
 		List<List<Integer>> expected = new ArrayList<List<Integer>>() {/**
 			 * 
@@ -79,7 +83,6 @@ public class ReadFileTst {
 	
 	@Test
 	public void TestReadFileEmpty() throws ArquivoNaoEncontradoException {
-		Parser parser = new Parser();
 		parser.readFile("src/static/empty.out");
 		Vector<Vector<Integer>> expected = new Vector<Vector<Integer>>();
 		assertEquals(expected, parser.getFile());
