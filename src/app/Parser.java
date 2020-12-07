@@ -27,18 +27,17 @@ public class Parser {
 	}
 	public void readFile (String fileName) throws ArquivoNaoEncontradoException {
 		setInputFilePath(fileName);
-		Scanner reader = openFile(this.inputFilePath);
+		persistence.startReader(openFile(this.inputFilePath));
 		
-		
-		while (reader.hasNextLine()) {
-			String value = reader.nextLine();
+		while (persistence.hasNextLine()) {
+			String value = persistence.nextLine();
 			if (value.startsWith("-")) {
 				this.vls.add(new Vector<Integer>());
 			} else {
 				this.vls.lastElement().add(Integer.parseInt(value));
 			}
 		}
-		reader.close();
+		persistence.closeReader();
 	}
 	
 	public Scanner openFile (String fileName) throws ArquivoNaoEncontradoException {
