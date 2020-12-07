@@ -25,12 +25,8 @@ public class Parser {
 	}
 	public void readFile (String fileName) throws ArquivoNaoEncontradoException {
 		setInputFilePath(fileName);
-		Scanner reader;
-		try {
-			reader = new Scanner(new FileReader(fileName));
-		}catch (FileNotFoundException err) {
-			throw new ArquivoNaoEncontradoException(fileName);
-		}
+		Scanner reader = openFile(this.inputFilePath);
+		
 		
 		while (reader.hasNextLine()) {
 			String value = reader.nextLine();
@@ -41,6 +37,16 @@ public class Parser {
 			}
 		}
 		reader.close();
+	}
+	
+	public Scanner openFile (String fileName) throws ArquivoNaoEncontradoException {
+		Scanner reader;
+		try {
+			reader = new Scanner(new FileReader(fileName));
+		}catch (FileNotFoundException err) {
+			throw new ArquivoNaoEncontradoException(fileName);
+		}
+		return reader;
 	}
 	
 	public boolean writeFile () throws EscritaNaoPermitidaException  {
