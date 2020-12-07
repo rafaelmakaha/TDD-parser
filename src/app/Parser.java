@@ -49,14 +49,18 @@ public class Parser {
 		return reader;
 	}
 	
+	private FileOutputStream openOutputFile () throws FileNotFoundException {
+		String outFile = null;
+		if (getInputFilePath().contains("analysis"))
+			outFile = "analysisTimeTab.out";
+		if (getInputFilePath().contains("total"))
+			outFile = "analysisTimeTab.out";
+		return new FileOutputStream(getOutputFilePath()+outFile);
+	}
+	
 	public boolean writeFile () throws EscritaNaoPermitidaException  {
 		try {
-			String outFile = null;
-			if (getInputFilePath().contains("analysis"))
-				outFile = "analysisTimeTab.out";
-			if (getInputFilePath().contains("total"))
-				outFile = "analysisTimeTab.out";
-			FileOutputStream file = new FileOutputStream(getOutputFilePath()+outFile);
+			FileOutputStream file = openOutputFile();
 			
 			OutputStreamWriter writer =
 					new OutputStreamWriter(file, StandardCharsets.UTF_8);
