@@ -19,46 +19,45 @@ public class WriteFile {
 		try {
 			FileOutputStream file = parser.openOutputFile();
 			
-			OutputStreamWriter writer =
-					new OutputStreamWriter(file, StandardCharsets.UTF_8);
+			parser.persistence.startWriter(file);
 			
 			Vector<Vector<Integer>> values = parser.getFile();
 			
 			if (parser.getSequenceFormat() == "ROW") {				
 				for(int i=0; i < values.size(); i++) {
 					Vector<Integer> aux = values.elementAt(i);
-					writer.write(Integer.toString(i+1));
-					writer.write(parser.getDelimiter());
+					parser.persistence.writeString(Integer.toString(i+1));
+					parser.persistence.writeString(parser.getDelimiter());
 					for (int j=0; j < aux.size(); j++) {
-						writer.write(Integer.toString(aux.elementAt(j)));
-						writer.write(parser.getDelimiter());
+						parser.persistence.writeString(Integer.toString(aux.elementAt(j)));
+						parser.persistence.writeString(parser.getDelimiter());
 					}
-					writer.write("\n");
+					parser.persistence.writeNewLine();
 				}
 			} else {
 				Vector<Integer> sizes = new Vector<Integer>();
 				for(int i=0; i < values.size(); i++) {
 					sizes.add(values.elementAt(i).size());
-					writer.write(Integer.toString(i+1));
-					writer.write(";");
+					parser.persistence.writeString(Integer.toString(i+1));
+					parser.persistence.writeString(parser.getDelimiter());
 				}
-				writer.write("\n");
+				parser.persistence.writeNewLine();
 				for(int i=0; i < Collections.max(sizes); i++) {
 					int j = 0;
 					while(j < values.size()) {
 						Vector<Integer> aux = values.elementAt(j);							
 						try {
-							writer.write(Integer.toString(aux.elementAt(i)));
+							parser.persistence.writeString(Integer.toString(aux.elementAt(i)));
 						} catch (Exception e) {
-							writer.write("");
+							parser.persistence.writeString("");
 						}
-						writer.write(";");
+						parser.persistence.writeString(parser.getDelimiter());
 						j++;
 					}
-					writer.write("\n");
+					parser.persistence.writeNewLine();
 				}
 			}
-			writer.close();
+			parser.persistence.closeWriter();
 		} catch (Exception err) {
 			throw new EscritaNaoPermitidaException();
 		}

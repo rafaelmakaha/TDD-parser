@@ -19,9 +19,11 @@ public class Parser {
 	private String sequenceFormat;
 	private String outputFilePath;
 	private String inputFilePath;
+	public Persistence persistence;
 	
 	public Parser() {
 		this.vls = new Vector<Vector<Integer>>();
+		this.persistence = new Persistence();
 	}
 	public void readFile (String fileName) throws ArquivoNaoEncontradoException {
 		setInputFilePath(fileName);
